@@ -70,3 +70,41 @@ that runs both on Node.js and in the browser) and Chai (A BDD/TDD assertion libr
 
 ## API docs
 
+1. [Locations]
+
+* POST `localhost:8000/api/v1/location`
+
+  * To add a location, hit this endpoint via postman and supply the `Name`, to the request body
+
+* GET `localhost:8000/api/v1/location`
+  * To view all locatoion with the sublocation below it details
+  
+* DELETE `localhost:8000/api/v1/location/:mainLocationId`
+    * To delete a location, supply the location id i.e mainLocationId as a params to the route.
+
+  **NOTE**: Deleting a location removes all sublocations under the application.
+
+* GET `localhost:8000/api/v1/location/:mainLocationId`
+  * To view a particular location, supply the location id i.e mainLocationId as a params to the route.
+
+* PUT `localhost:8000/api/v1/location/:mainLocationId`
+  * To edit the details of a location, supply the location id i.e mainLocationId as a params to the route.
+
+
+1. [SubLocations]
+
+* POST `localhost:8000/api/v1/sublocation/:mainLocationId`
+
+  * To add a sublocation under a location, hit this endpoint via postman and supply the `name`, `maleResidents`, `femaleResidents` to the request body. And the id of the main location as params.
+
+* GET `localhost:8000/api/v1/sublocation`
+  * To view all sublocatoion with their main locations
+  
+* DELETE `localhost:8000/api/v1/sublocation/:subLocationId`
+    * To delete a sublocation, supply the sublocation id i.e subLocationId as a params to the route.
+
+* GET `localhost:8000/api/v1/sublocation/:subLocationId`
+  * To view a particular location, supply the location id i.e subLocationId as a params to the route.
+
+* PUT `localhost:8000/api/v1/sublocation/:subLocationId`
+  * To edit the details of a sublocation, supply the sublocation id i.e subLocationId as a params to the route.
