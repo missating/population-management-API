@@ -72,7 +72,7 @@ export default class mainLocationControllers {
    */
   static editLocation(req, res) {
     const {
-      locationName
+      name
     } = req.body;
 
     db.MainLocation.findOne({
@@ -91,7 +91,7 @@ export default class mainLocationControllers {
       }
       if (foundLocation) {
         const locationDetails = {
-          locationName: locationName ? locationName.trim() : foundLocation.name,
+          name: name ? name.trim() : foundLocation.name,
         };
         foundLocation.update(locationDetails)
           .then(updatedLocation => res.status(200)
