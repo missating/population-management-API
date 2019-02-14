@@ -6,7 +6,7 @@ import db from '../models/index';
  * @export
  *
  */
-export default class mainLocationControllers {
+export default class subLocationControllers {
   /**
    * @description - Creates a sub location
    * @static
@@ -198,7 +198,12 @@ export default class mainLocationControllers {
               }
             }));
       }
-    }).catch((error) => console.log('========', error));
+    }).catch(() => res.status(500).json({
+      errors: {
+        status: '500',
+        detail: 'Internal server error'
+      }
+    }));
   }
 
 /**

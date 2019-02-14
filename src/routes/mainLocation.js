@@ -1,4 +1,6 @@
 import location from '../controllers/mainLocationControllers';
+import verifyNewLocation from '../middleware/mainLocationValidation';
+import { verifyMainLocationId } from '../middleware/idValidation';
 
 /**
  *@function mainLocationRoutes
@@ -12,11 +14,11 @@ export default function mainLocationRoutes(app) {
   // create a location, get all location
   app.route('/api/v1/location')
     .get(location.getAllLocations)
-    .post(location.createLocation);
+    .post(verifyNewLocation, location.createLocation);
 
   // edit a location, get one location
   app.route('/api/v1/location/:mainLocationId')
-    .put(location.editLocation)
-    .get(location.getOneLocation)
-    .delete(location.deleteLocation);
+    .put(verifyMainLocationId, location.editLocation)
+    .get(verifyMainLocationId, location.getOneLocation)
+    .delete(verifyMainLocationId, location.deleteLocation);
 }
