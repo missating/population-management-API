@@ -5,7 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test npm run reset-migrate && cross-env NODE_ENV=test nyc mocha src/__tests__/**.spec.js --timeout 3000 --exit --require babel-register --reporter spec",
+    "reset-migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "migrate": "node_modules/.bin/sequelize db:migrate"
+  },
+  "nyc": {
+    "exclude": [
+      "src/__tests__/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -20,10 +28,16 @@
   "homepage": "https://github.com/missating/population-management-API#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "morgan": "^1.9.1",
-    "sequelize-cli": "^5.4.0"
+    "nyc": "^13.2.0",
+    "sequelize-cli": "^5.4.0",
+    "supertest": "^3.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

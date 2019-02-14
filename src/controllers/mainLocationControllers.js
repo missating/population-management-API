@@ -20,12 +20,12 @@ export default class mainLocationControllers {
    */
   static createLocation(req, res) {
     const {
-      locationName
+      name
     } = req.body;
 
     return db.MainLocation.findOne({
       where: {
-        name: locationName
+        name
       }
     }).then((foundLocation) => {
       if (foundLocation) {
@@ -40,7 +40,7 @@ export default class mainLocationControllers {
 
       if (!foundLocation) {
         db.MainLocation.create({
-          name: locationName
+          name
         }).then(newLocation => {
           res.status(201)
             .json({

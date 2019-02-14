@@ -182,10 +182,10 @@ export default class mainLocationControllers {
       }
       if (foundSubLocation) {
         const subLocationDetails = {
-          name: namd ? name.trim() : foundSubLocation.name,
+          name: name ? name.trim() : foundSubLocation.name,
           femaleResidents: femaleResidents ? parseInt(femaleResidents, 10) : foundSubLocation.femaleResidents,
           maleResidents: maleResidents ? parseInt(maleResidents, 10) : foundSubLocation.maleResidents,
-          totalResidents: parseInt(femaleResidents, 10) + parseInt(maleResidents, 10),
+          totalResidents: Number(femaleResidents) + Number(maleResidents),
         };
         foundSubLocation.update(subLocationDetails)
           .then(updatedSubLocation => res.status(200)
@@ -198,15 +198,7 @@ export default class mainLocationControllers {
               }
             }));
       }
-    }).catch(() => res.status(500)
-      .json({
-        errors: [
-          {
-            status: '500',
-            detail: 'internal server error'
-          }
-        ]
-      }));
+    }).catch((error) => console.log('========', error));
   }
 
 /**
