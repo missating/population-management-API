@@ -82,7 +82,7 @@ export default class mainLocationControllers {
     }).then((foundLocation) => {
       if (!foundLocation) {
         return res.status(404).json({
-          error: {
+          errors: {
             status: '404',
             title: 'Not Found',
             detail: `Can't find location with id ${req.params.mainLocationId}`

@@ -9,7 +9,7 @@ const verifyNewSubLocation = (req, res, next) => {
   const errors = {};
 
   if (!name) {
-    errors.name = 'Please provide a name for the location';
+    errors.name = 'Please provide a name for the sublocation';
   } else if (name && validator.isEmpty(name.trim())) {
     errors.name = 'Sublocation name cannot be empty';
   } else if (!maleResidents) {

@@ -16,7 +16,7 @@ export default function mainLocationRoutes(app) {
     .get(location.getAllLocations)
     .post(verifyNewLocation, location.createLocation);
 
-  // edit a location, get one location
+  // edit a location, get one location,delete a location
   app.route('/api/v1/location/:mainLocationId')
     .put(verifyMainLocationId, location.editLocation)
     .get(verifyMainLocationId, location.getOneLocation)
