@@ -54,7 +54,24 @@ export default class subLocationControllers {
               })
           })
         if (req.params.mainLocationId) {
-          return createSubLocation(req.params.mainLocationId);
+          return db.MainLocation.findOne({
+            where:{
+              id: req.params.mainLocationId
+            }
+          }).then((foundMainLocation) => {
+            if(foundMainLocation) {
+              return createSubLocation(req.params.mainLocationId);
+            }
+            if(!foundMainLocation) {
+              return res.status(404).json({
+                errors: {
+                  status: '404',
+                  title: 'Not Found',
+                  detail: `Can't find location with id ${req.params.mainLocationId}`
+                }
+              });
+            }
+          })
         }
       }
     })

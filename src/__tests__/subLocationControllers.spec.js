@@ -6,7 +6,7 @@ const request = supertest(app);
 
 describe('Sub Location API', () => {
   describe('# Create Sub Location: ', () => {
-    it('Should create a sublocation if all details are correct', (done) => {
+    it('Should create a location if all details are correct', (done) => {
       request.post('/api/v1/location')
         .send({
           name: 'test',
@@ -91,6 +91,23 @@ describe('Sub Location API', () => {
         .end((err, res) => {
           expect(res.status).to.equal(409);
           expect(res.body.errors.detail).to.equal('A sub location with this name already exist');
+          done();
+        });
+    });
+
+    it('should not create a subocation if the main location does not exist', (done) => {
+      request.post('/api/v1/sublocation/90')
+        .send({
+          name: 'Ebonyi',
+          maleResidents: 4,
+          femaleResidents: 4,
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.errors.title).to.equal('Not Found');
+          expect(res.body.errors.detail)
+            .to.equal('Can\'t find location with id 90');
           done();
         });
     });
@@ -194,7 +211,7 @@ describe('Sub Location API', () => {
 
   describe('Delete sub Loction: ', () => {
     it('should return a success message after deleting a parent location', (done) => {
-        request.delete('/api/v1/subLocation/1')
+      request.delete('/api/v1/subLocation/1')
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.data.message).to.equal('The sublocation has been successfully deleted');
