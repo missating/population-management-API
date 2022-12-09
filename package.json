@@ -32,7 +32,7 @@
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "lodash": "^4.17.13",
     "mocha": "^5.2.0",
     "morgan": "^1.9.1",
